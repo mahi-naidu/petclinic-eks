@@ -511,9 +511,9 @@
                 <db.script>mysql</db.script>
                 <jpa.database>MYSQL</jpa.database>
                 <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://localhost:3306/petclinic?useUnicode=true</jdbc.url>
-                <jdbc.username>petclinic</jdbc.username>
-                <jdbc.password>petclinic</jdbc.password>
+                <jdbc.url>jdbc:mysql://terraform-20210714072342273100000001.c0sseavb7qsb.us-east-2.rds.amazonaws.com:3306/krishnadb?useUnicode=true</jdbc.url>
+                <jdbc.username>krishna</jdbc.username>
+                <jdbc.password>9573972811Mahi</jdbc.password>
             </properties>
             <dependencies>
                 <dependency>
