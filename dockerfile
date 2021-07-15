@@ -1,9 +1,16 @@
-FROM maven:3.5-jdk-8 as BUILD
-
-COPY src /usr/src/myapp/src
-COPY pom.xml /usr/src/myapp
-RUN  /usr/src/myapp/pom.xml mvn clean package
-
-FROM tomcat:9.0
-
-COPY --from=BUILD /usr/src/myapp/target/petclinic.war /usr/local/tomcat/webapps/petclinic.war
+FROM maven:3.6.3-openjdk-11 AS maven
+RUN apt-get update -y && apt-get upgrade -y && apt-get install git -y && apt-get install unzip -y
+WORKDIR /opt
+RUN wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50-windows-x64.zip
+RUN  unzip apache-tomcat-9.0.50.zip
+RUN mv apache-tomcat-9.0.50 tomcat
+RUN chmod -R 700 tomcat
+WORKDIR /opt
+RUN git clone git@github.com:mahi-naidu/petclinic-eks.git
+WORKDIR /opt/petclinic-eks
+RUN mvn clean package
+WORKDIR /opt/petclinic-eks/target
+RUN cp -R petclinic.war /opt/tomcat/webapps/
+EXPOSE 8080
+CMD chmod +x /opt/tomcat/bin/catalina.sh
+CMD /opt/tomcat/bin/catalina.sh run
