@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: petclinic-ingress
+ namespace: petclinic-docker
+spec:
+ rules:
+ - host: petclinic-docker.kkmn.info
+   http:
+     paths:
+     - path:
+       backend:
+         serviceName: petclinic-svc
+         servicePort: 80
